@@ -78,8 +78,9 @@ class PlayScene extends Phaser.Scene {
 		return colors[random];
 	}
 
-	update() {
-		this.balloons.forEach(b => b.update());
+	update(time,delta) {
+		// console.log('update time=%o, delta=%o', time,delta);
+		this.balloons.forEach(b => b.update(time,delta));
 		this.scoreText.setText('Score: '+this.score);
 	}
 }

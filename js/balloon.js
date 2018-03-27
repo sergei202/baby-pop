@@ -5,6 +5,8 @@ class Balloon extends Phaser.GameObjects.Sprite {
 		this.setInteractive();
 		this.on('pointerdown', e => this.onPop(e));
 
+		this.angle = -15 + Math.random()*30;
+		this.angleDir = -1 + Math.round(Math.random())*2;	// 1 or -1
 		// this.tweens.add({
 		// 	target: this,
 		// 	angle: 360,
@@ -18,11 +20,12 @@ class Balloon extends Phaser.GameObjects.Sprite {
 		this.scene.killBalloon(this);
 	}
 
-	update() {
-		if(this.y>-64) {
-			this.y -= this.speed;
-		} else {
-			this.scene.gameOver();
-		}
+	update(time,delta) {
+		if(this.y<-64) return this.scene.gameOver();
+
+		this.angle += this.angleDir/5;
+		if(this.angle>25 || this.angle<-25) this.angleDir *= -1;
+
+		this.y -= this.speed;
 	}
 }
