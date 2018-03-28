@@ -2,25 +2,41 @@
 
 class Game extends Phaser.Game {
 	constructor() {
-		const config = {
+		super({
 			type: Phaser.AUTO,
 			width: window.innerWidth,
 			height: window.innerHeight,
 			scene: [PlayScene]
-		};
-		super(config);
+		});
+
+		window.game = this;
+
+		// Handle game resizing (and orientation changes)
+		this.resizeTimeout = null;
+		this.resizeListener = () => game.onResize();
+		window.addEventListener('resize', this.resizeListener);
 	}
+
 
 	onResize() {
 		console.log('resize event');
-		// Broken.  Need to find a resize solution.
-		// this.renderer.resize(window.innerWidth, window.innerHeight, 1.0);
-		// this.events.emit('resize');
+
+		// Debounce resize events
+		if(this.resizeTimeout) clearTimeout(this.resizeTimeout);
+		setTimeout(() => {
+			// Just destroy the current game and recreate it.
+			window.removeEventListener('resize', this.resizeListener);
+			// Still some issues with this.  Throws phaser errors.
+			this.destroy(true);
+			setTimeout(() => new Game(), 500);
+
+			// Broken.  Need to find a resize solution.
+			// this.renderer.resize(window.innerWidth, window.innerHeight, 1.0);
+			// this.events.emit('resize');
+		}, 250);
 	}
 }
 
 window.onload = () => {
-	const game = new Game();
-	window.game = game;
-	window.addEventListener('resize', () => game.onResize());
+	new Game();
 };

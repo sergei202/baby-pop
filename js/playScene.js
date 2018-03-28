@@ -16,7 +16,7 @@ class PlayScene extends Phaser.Scene {
 	create() {
 		this.sky = this.add.image(0, 0, 'sky');
 		this.sky.setOrigin(0,0);
-		this.sky.setScale(3,2);
+		this.sky.setScale(3,3);
 
 		this.balloons = [];
 		this.score = 0;
