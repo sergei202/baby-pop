@@ -36,7 +36,3 @@ class Game extends Phaser.Game {
 		}, 250);
 	}
 }
-
-window.onload = () => {
-	new Game();
-};

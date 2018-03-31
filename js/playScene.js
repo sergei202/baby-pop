@@ -16,12 +16,12 @@ class PlayScene extends Phaser.Scene {
 	create() {
 		this.sky = this.add.image(0, 0, 'sky');
 		this.sky.setOrigin(0,0);
-		this.sky.setScale(3,3);
+		// this.sky.setScale(3,3);
 
 		this.balloons = [];
 		this.score = 0;
 
-		this.scoreText = this.add.text(50,50, '', {fontFamily:'Arial Black', fontSize:74, color:'#c51b7d'});
+		this.scoreText = this.add.text(30,30, '', {fontFamily:'Arial Black', fontSize:64, color:'#c51b7d'});
 		this.scoreText.setStroke('#de77ae', 5);
 		this.scoreText.setShadow(2, 2, '#333333', 2, true, false);
 
